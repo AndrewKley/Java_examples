@@ -3,7 +3,7 @@ public class Inheritance {
         A a = new A();
         B b = new B();
         C c = new C();
-        A abc = new C();
+        // A abc = new C();
 
         // a.sayHi1();
         // b.sayHi1();
@@ -18,7 +18,7 @@ public class Inheritance {
 }
 
 class A {
-    private int age = 7;
+    // private int age = 7;
 
     public void sayHi1() {
         System.out.println("A've said Hi1 ");
