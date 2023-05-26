@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public class GameHelper {
     private static final String alphabet = "abcdefg";
     private int gridSize = 49;
-    private int shipCount = 0;
     private int gridLength = 7;
     private int[] grid = new int[gridSize];
 
@@ -29,14 +28,9 @@ public class GameHelper {
         int location = 0;
         int[] coords = new int[shipSize];
         ArrayList<String> alphaCells = new ArrayList<String>();
-        String[] alphaCoords = new String[shipSize];
         String temp = null;
 
-        shipCount++;
-        int incrementToX = 1;
-        if ((shipCount % 2) == 1) {
-            incrementToX = gridLength;
-        }
+        int incrementToX = gridLength;
 
         while (!success & attempts++ < 200) {
             location = (int)(Math.random() * gridSize);
