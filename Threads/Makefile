@@ -1,7 +1,7 @@
 FILES=Threads.java
 NAME=Threads
 
-all: Threads
+all: threads
 
 threads:
 	javac $(FILES)

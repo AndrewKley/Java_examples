@@ -32,7 +32,8 @@ public class ErrorThread implements Runnable {
         }
     }
 
-    public void makeWithdrawal(int amount) {
+    // if remove keyword synchronized will be error
+    private synchronized void makeWithdrawal(int amount) {
         if (account.getBalance() >= amount) {
             try {
                 System.out.println(Thread.currentThread().getName() + " goes to sleep");
