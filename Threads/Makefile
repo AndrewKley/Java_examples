@@ -3,9 +3,13 @@ NAME=Threads
 
 all: Threads
 
-Threads:
+threads:
 	javac $(FILES)
 	java $(NAME)
+
+errorThread:
+	javac ErrorThread.java
+	java ErrorThread
 
 clean:
 	rm -rf *.class
