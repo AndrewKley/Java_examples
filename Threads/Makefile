@@ -4,8 +4,10 @@ NAME=Threads
 all: threads
 
 threads:
-	javac $(FILES)
-	java $(NAME)
+	javac -d ./classes $(FILES)
+	# cd ./classes
+	# jar -cvmf manifest.txt App.jar *.class
+	# java -jar App.jar
 
 errorThread:
 	javac ErrorThread.java
