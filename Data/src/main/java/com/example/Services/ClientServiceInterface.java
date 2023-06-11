@@ -1,8 +1,13 @@
 package com.example.Services;
 
-import org.springframework.stereotype.Service;
+import com.example.models.Client;
 
-@Service
-public class ClientService {
+import java.util.List;
 
+public interface ClientServiceInterface {
+    void createClient(Client client);
+    List<Client> getAllClient();
+    Client getClient(int id);
+    boolean updateClient(Client client, int id);
+    boolean deleteClient(int id);
 }
