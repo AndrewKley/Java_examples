@@ -11,6 +11,14 @@ public class CountryDTO {
         return country;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getPopulation() {
+        return population;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
