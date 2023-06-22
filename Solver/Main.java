@@ -1,9 +1,13 @@
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Iterator;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+
 import java.io.IOException;
 import java.nio.file.Path;
 
@@ -19,17 +23,17 @@ public class Main {
             City city = cityService.parseCSVCity(scanner.next());
             cityService.addCity(city);
         }
+        Map<String, Integer> result = cityService.getCountCitiesInRegions();
+        for (Map.Entry<String, Integer> item : result.entrySet()) {
+            System.out.println(item);
+        }
+
         scanner.close();
-        // cityService.sortByName();
-        cityService.sortByRegionAndName();
-        cityService.getCities().forEach(c -> {
-            System.out.println(c);
-        });
     }
 }
 
 class CityService {
-    private List<City> cities = new ArrayList<>();
+    private List<City> cities = new LinkedList<>();
 
     public List<City> getCities() {
         return cities;
@@ -53,6 +57,20 @@ class CityService {
         return city;
     }
 
+    public Map<String, Integer> getCountCitiesInRegions() {
+        Map<String, Integer> res = new HashMap<>();
+        Iterator<City> cityIterator = cities.iterator();
+        while (cityIterator.hasNext()) {
+            City city = cityIterator.next();
+            if (res.containsKey(city.getRegion())) {
+                res.replace(city.getRegion(), res.get(city.getRegion()) + 1);
+            } else {
+                res.put(city.getRegion(), 1);
+            }
+        }
+        return res;
+    }
+
     public List<City> sortByName() {
         Collections.sort(cities, new Comparator<City>() {
             public int compare(City a, City b) {
@@ -65,10 +83,34 @@ class CityService {
     public List<City> sortByRegionAndName() {
         Collections.sort(cities, new Comparator<City>() {
             public int compare(City a, City b) {
-                return a.getRegion().compareTo(b.getRegion()) * -1 <= 0 ? -1 : 1;
-                // && a.getName().compareTo(b.getName()) > 0 ? 1 : 0;
+                int district = a.getDistrict().compareTo(b.getDistrict()); 
+                int name = a.getName().compareTo(b.getName());
+                if (district == 0) {
+                    district += name;
+                }
+                return district;
             }
         });
         return cities;
+    }
+
+    public int getIndexLargestPopulationCity() {
+        City[] citiesArray = new City[cities.size()];
+        Iterator<City> citiesIterator = cities.iterator();
+        int i = 0, resIndex = 0, population = 0;
+        while (citiesIterator.hasNext()) {
+            citiesArray[i] = citiesIterator.next();
+            int populationTmp = citiesArray[i].getPopulation();
+            if (i == 0) {
+                population = populationTmp;
+                resIndex = i;
+            }
+            if (population < populationTmp) {
+                population = populationTmp;
+                resIndex = i;
+            }
+            i++;
+        }
+        return resIndex;
     }
 }
