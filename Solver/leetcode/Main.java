@@ -48,57 +48,61 @@ class Solution {
     public String intToRoman(int num) {
         initSymdols();
         StringBuilder res = new StringBuilder();
-        int degree = 1, divider = 10;
+        int countDigits = 1, divider = 10;
         int tmp = num;
 
         while (tmp / 10 > 0) {
             divider *= 10;
-            degree *= 10;
+            countDigits *= 10;
             tmp /= 10;
         }
 
         for (int i = num; i > 0;) {
-            if (degree == i) {
-                res.append(symbols.get(degree));
-                i -= degree;
+            if (countDigits == i) {
+                res.append(symbols.get(countDigits));
+                i -= countDigits;
                 divider /= 10;
-                degree /= 10;
+                countDigits /= 10;
                 continue;
             }
-            if (divider - degree <= i) {
-                res.append(symbols.get(degree) + symbols.get(divider));
-                i -= divider - degree;
-                for (; getDifferent(i, degree) != 0;){
-                    divider /= 10;
-                    degree /= 10;
-                }
+            if (divider - countDigits <= i) {
+                res.append(symbols.get(countDigits) + symbols.get(divider));
+                i -= divider - countDigits;
+                removeDifferent(i, countDigits, divider); 
+                // for (; getDifferent(i, countDigits) != 0;) {
+                //     divider /= 10;
+                //     countDigits /= 10;
+                // }
                 continue;
             }
             if (i >= divider / 2) {
                 res.append(symbols.get(divider / 2));
                 i -= divider / 2;
-                for (; getDifferent(i, degree) != 0;){
-                    divider /= 10;
-                    degree /= 10;
-                }
+                removeDifferent(i, countDigits, divider); 
+                // for (; getDifferent(i, countDigits) != 0;) {
+                //     divider /= 10;
+                //     countDigits /= 10;
+                // }
                 continue;
             }
-            if (divider / 2 - degree <= i) {
-                res.append(symbols.get(degree) + symbols.get(divider / 2));
-                i -= divider / 2 - degree;
-                for (; getDifferent(i, degree) != 0;){
-                    divider /= 10;
-                    degree /= 10;
-                }
+            if (divider / 2 - countDigits <= i) {
+                res.append(symbols.get(countDigits) + symbols.get(divider / 2));
+                i -= divider / 2 - countDigits;
+                removeDifferent(i, countDigits, divider); 
+                // for (; getDifferent(i, countDigits) != 0;) {
+                //     divider /= 10;
+                //     countDigits /= 10;
+                // }
                 continue;
             }
-            if (i > degree && degree >= 10) {
-                i -= degree;
-                res.append(symbols.get(degree));
-                for (; getDifferent(i, degree) != 0;){
-                    divider /= 10;
-                    degree /= 10;
-                }
+            if (i > countDigits && countDigits >= 10) {
+                i -= countDigits;
+                res.append(symbols.get(countDigits));
+                removeDifferent(i, countDigits, divider); 
+                // for (; getDifferent(i, countDigits) != 0;) {
+                //     divider /= 10;
+                //     countDigits /= 10;
+                // }
                 continue;
             }
             res.append(getSingle(i));
@@ -106,6 +110,13 @@ class Solution {
         }
 
         return res.toString();
+    }
+
+    private void removeDifferent(int i, Integer countDigits, Integer divider) {
+        for (; getDifferent(i, countDigits) != 0;){
+            divider /= 10;
+            countDigits /= 10;
+        }
     }
 
     private String getSingle(int num) {
