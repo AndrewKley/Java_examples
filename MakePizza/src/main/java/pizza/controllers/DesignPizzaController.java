@@ -1,17 +1,17 @@
 package pizza.controllers;
 
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 import pizza.models.Ingredient;
 import pizza.models.Ingredient.Type;
+import pizza.models.Pizza;
+import pizza.models.PizzaOrder;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,6 +40,33 @@ public class DesignPizzaController {
             model.addAttribute(type.toString().toLowerCase()
                     , filterByType(ingredients, type));
         }
+    }
+
+    @ModelAttribute(name = "pizzaOrder")
+    public PizzaOrder order() {
+        return new PizzaOrder();
+    }
+
+    @ModelAttribute(name = "pizza")
+    public Pizza pizza() {
+        return new Pizza();
+    }
+
+    @GetMapping
+    public String showDesignForm() {
+        return "design";
+    }
+
+    @PostMapping
+    public String creatingPizza(
+            @Valid Pizza pizza, Errors errors,
+            @ModelAttribute PizzaOrder pizzaOrder) {
+        if (errors.hasErrors()) {
+            return "design";
+        }
+        pizzaOrder.addPizza(pizza);
+        log.info("Creating pizza: {}", pizza);
+        return "redirect:/orders/current";
     }
 
     private Iterable<Ingredient> filterByType(

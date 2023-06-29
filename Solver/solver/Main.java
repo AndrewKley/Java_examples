@@ -1,36 +1,34 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class Main {
-    public static void main(String[] args) {
-        Solution solution = new Solution();
-        // System.out.println(solution.longestPalindrome("babad"));
-        System.out.println(solution.longestPalindrome("adam"));
-        System.out.println(solution.longestPalindrome("cbbd"));
-        // System.out.println(solution.longestPalindrome("ac"));
-        // System.out.println(solution.longestPalindrome("bba"));
-    }
-}
+    public static void main(String[] args) throws IOException {
+        BufferedReader scanner = new BufferedReader(new InputStreamReader(System.in));
+        String[] info = scanner.readLine().split(" ");
+        String[] weight = scanner.readLine().split(" ");
 
-class Solution {
-    public String longestPalindrome(String s) {
-        StringBuilder sb = new StringBuilder(s);
-        String str = sb.reverse().toString();
-        String res = str;
+        int n = Integer.parseInt(info[0]);
+        int x = Integer.parseInt(info[1]);
+        int t = Integer.parseInt(info[2]);
 
-        for (int i = 0; i < s.length() - 1; i++) {
-            res = str;
-            for (int j = s.length(); j > i; j--) {
-                System.out.format("res: %s\ti: %d\tj: %d\n", res, i, j);
-                if (s.indexOf(res) != -1) {
-                    System.out.println("-");
-                    return res;
-                }
-                if (j == res.length())  {
-                    res = res.substring(i, j-i);
-                    continue;
-                }
-                res = res.substring(i, j);
+        String res = "";
+        int[] different = new int[n];
+
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            different[i] = Math.abs(Integer.parseInt(weight[i]) - x);
+            int min = different[i];
+            if (min == -1 || t - different[i] < 0) continue;
+            if (t - min >= 0 && different[i] != -1) {
+                t -= min;
+                different[i] = -1;
+                res += i + 1 + " ";
+                count++;
             }
         }
-        
-        return "" + s.charAt(0);
+
+        System.out.println(count);
+        System.out.println(res);
     }
 }
