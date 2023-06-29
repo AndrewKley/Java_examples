@@ -12,7 +12,10 @@
                 <div th:each="ingredient: ${wrap}">
                     <input type="checkbox" th:field="*{ingredients}"
                             th:value="${ingredient.id}">
-                    <span th:text="${ingredient.name}">INGREDIENT</span><br>
+                    <span th:text="${ingredient.name}">INGREDIENT</span>
+                    <span class="validationError"
+                          th:if="${#fields.hasErrors()}"
+                          th:errors="*{name}">Please select at least one ingredient</span><br>
                 </div>
             </div>
 
@@ -21,7 +24,8 @@
                 <div th:each="ingredient: ${protein}">
                     <input type="checkbox" th:field="*{ingredients}"
                             th:value="${ingredient.id}">
-                    <span th:text="${ingredient.name}">INGREDIENT</span><br>
+                    <span th:text="${ingredient.name}">INGREDIENT</span>
+                    <span class="validationError">Please select at least one ingredient</span><br>
                 </div>
             </div>
 
@@ -30,7 +34,8 @@
                 <div th:each="ingredient: ${cheese}">
                     <input type="checkbox" th:field="*{ingredients}"
                            th:value="${ingredient.id}">
-                    <span th:text="${ingredient.name}">INGREDIENT</span><br>
+                    <span th:text="${ingredient.name}">INGREDIENT</span>
+                    <span class="validationError">Please select at least one ingredient</span><br>
                 </div>
             </div>
 
@@ -39,13 +44,17 @@
                 <div th:each="ingredient: ${protein}">
                     <input type="checkbox" th:field="*{ingredients}"
                            th:value="${ingredient.id}">
-                    <span th:text="${ingredient.name}">INGREDIENT</span><br>
+                    <span th:text="${ingredient.name}">INGREDIENT</span>
+                    <span class="validationError">Please select at least one ingredient</span><br>
                 </div>
             </div>
 
             <div>
                 <h3>Name your pizza creation</h3>
-                <input type="text" th:field="*{name}"><br>
+                <input type="text" th:field="*{name}">
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('name')}"
+                      th:errors="*{name}">pizza name error</span><br>
                 <button>Submit</button>
             </div>
         </div>

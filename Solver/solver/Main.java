@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -27,10 +26,10 @@ public class Main {
             }
         }
 
-        for (Map.Entry<Integer, ArrayList<Integer>> d : different.entrySet()) {
-            System.out.print(d.getKey() + ": ");
-            d.getValue().forEach(day -> System.out.print(day + " "));
-            System.out.println();
-        }
+        // for (Map.Entry<Integer, ArrayList<Integer>> d : different.entrySet()) {
+        //     System.out.print(d.getKey() + ": ");
+        //     d.getValue().forEach(day -> System.out.print(day + " "));
+        //     System.out.println();
+        // }
     }
 }
