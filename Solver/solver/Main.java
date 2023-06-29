@@ -1,6 +1,9 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -12,23 +15,22 @@ public class Main {
         int x = Integer.parseInt(info[1]);
         int t = Integer.parseInt(info[2]);
 
-        String res = "";
-        int[] different = new int[n];
-
-        int count = 0;
+        HashMap<Integer, ArrayList<Integer>> different = new HashMap<Integer, ArrayList<Integer>>();
+    
         for (int i = 0; i < n; i++) {
-            different[i] = Math.abs(Integer.parseInt(weight[i]) - x);
-            int min = different[i];
-            if (min == -1 || t - different[i] < 0) continue;
-            if (t - min >= 0 && different[i] != -1) {
-                t -= min;
-                different[i] = -1;
-                res += i + 1 + " ";
-                count++;
+            int diffTmp = Math.abs(Integer.parseInt(weight[i]) - x);
+            if (different.containsKey(i+1)) {
+                different.get(diffTmp).add(i+1);
+            } else {
+                different.put(diffTmp, new ArrayList<Integer>());
+                different.get(diffTmp).add(i+1);
             }
         }
 
-        System.out.println(count);
-        System.out.println(res);
+        for (Map.Entry<Integer, ArrayList<Integer>> d : different.entrySet()) {
+            System.out.print(d.getKey() + ": ");
+            d.getValue().forEach(day -> System.out.print(day + " "));
+            System.out.println();
+        }
     }
 }
