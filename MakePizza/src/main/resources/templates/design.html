@@ -12,10 +12,7 @@
                 <div th:each="ingredient: ${wrap}">
                     <input type="checkbox" th:field="*{ingredients}"
                             th:value="${ingredient.id}">
-                    <span th:text="${ingredient.name}">INGREDIENT</span>
-                    <span class="validationError"
-                          th:if="${#fields.hasErrors()}"
-                          th:errors="*{name}">Please select at least one ingredient</span><br>
+                    <span th:text="${ingredient.name}">INGREDIENT</span><br>
                 </div>
             </div>
 
@@ -25,7 +22,6 @@
                     <input type="checkbox" th:field="*{ingredients}"
                             th:value="${ingredient.id}">
                     <span th:text="${ingredient.name}">INGREDIENT</span>
-                    <span class="validationError">Please select at least one ingredient</span><br>
                 </div>
             </div>
 
@@ -35,7 +31,6 @@
                     <input type="checkbox" th:field="*{ingredients}"
                            th:value="${ingredient.id}">
                     <span th:text="${ingredient.name}">INGREDIENT</span>
-                    <span class="validationError">Please select at least one ingredient</span><br>
                 </div>
             </div>
 
@@ -45,7 +40,6 @@
                     <input type="checkbox" th:field="*{ingredients}"
                            th:value="${ingredient.id}">
                     <span th:text="${ingredient.name}">INGREDIENT</span>
-                    <span class="validationError">Please select at least one ingredient</span><br>
                 </div>
             </div>
 
@@ -55,6 +49,10 @@
                 <span class="validationError"
                       th:if="${#fields.hasErrors('name')}"
                       th:errors="*{name}">pizza name error</span><br>
+
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('ingredients')}"
+                      th:errors="*{ingredients}">ingredients count error</span><br>
                 <button>Submit</button>
             </div>
         </div>

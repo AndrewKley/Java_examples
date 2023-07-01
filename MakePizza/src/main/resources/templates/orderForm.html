@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Order form</title>
@@ -12,7 +13,7 @@
       <a th:href="@{/design}" id="another">Design another pizza</a>
       <ul>
         <li th:each="pizza: ${pizzaOrder.pizzas}">
-          <span th:test="${pizza.name}">Pizza name</span>
+          <span th:text="${pizza.name}">Pizza name</span>
         </li>
       </ul>
 
@@ -26,7 +27,7 @@
       <label for="deliveryStreet">Street: </label>
       <input type="text" th:field="*{deliveryStreet}">
       <span class="validationError"
-            th:if="${#fields.hasErrors('deliveryStreet;)}"
+            th:if="${#fields.hasErrors('deliveryStreet')}"
             th:errors="*{deliveryStreet}">delivery Street error</span><br>
 
       <label for="deliveryCity">City: </label>
@@ -45,7 +46,7 @@
       <input type="text" th:field="*{deliveryZip}">
       <span class="validationError"
             th:if="${#fields.hasErrors('deliveryZip')}"
-            th:errors="*{deliveryState}">delivery Zip error</span><br>
+            th:errors="*{deliveryZip}">delivery Zip error</span><br>
 
       <label for="ccNumber">ccNumber: </label>
       <input type="text" th:field="*{ccNumber}">
@@ -56,7 +57,7 @@
       <label for="ccExpiration">ccExpiration: </label>
       <input type="text" th:field="*{ccExpiration}">
       <span class="validationError"
-            th:if="${#fields.hadErrors('ccExpiration')}"
+            th:if="${#fields.hasErrors('ccExpiration')}"
             th:errors="*{ccExpiration}">cc Expiration error</span><br>
 
       <label for="ccCW">ccCW: </label>
