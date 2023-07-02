@@ -12,6 +12,8 @@ import pizza.models.Ingredient.Type;
 import pizza.models.Pizza;
 import pizza.models.PizzaOrder;
 import pizza.repositories.IngredientRepository;
+import pizza.repositories.JpaIngredientRepository;
+import pizza.repositories.JpaOrderRepository;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,10 +24,10 @@ import java.util.stream.Collectors;
 @RequestMapping("/design")
 @SessionAttributes("pizzaOrder")
 public class DesignPizzaController {
-    private final IngredientRepository repository;
+    private final JpaIngredientRepository repository;
 
     @Autowired
-    public DesignPizzaController(IngredientRepository repository) {
+    public DesignPizzaController(JpaIngredientRepository repository) {
         this.repository = repository;
     }
 

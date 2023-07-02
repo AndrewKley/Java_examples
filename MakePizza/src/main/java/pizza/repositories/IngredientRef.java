@@ -1,2 +1,8 @@
-package pizza.repositories;public interface IngredientRef {
+package pizza.repositories;
+
+import lombok.Data;
+
+@Data
+public class IngredientRef {
+    private final String ingredient;
 }

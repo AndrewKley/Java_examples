@@ -10,12 +10,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import pizza.models.PizzaOrder;
+import pizza.repositories.JpaOrderRepository;
+import pizza.repositories.OrderRepository;
 
 @Slf4j
 @Controller
 @RequestMapping("/orders")
 @SessionAttributes("pizzaOrder")
 public class OrderController {
+    private JpaOrderRepository repository;
+
+    public OrderController(JpaOrderRepository repository) {
+        this.repository = repository;
+    }
+
     @GetMapping("/current")
     public String orderForm() {
         return "orderForm";
@@ -28,9 +36,8 @@ public class OrderController {
         if (errors.hasErrors()) {
             return "orderForm";
         }
-        log.info("Order submited: {}", pizzaOrder);
+        repository.save(pizzaOrder);
         sessionStatus.setComplete();
-        log.atInfo();
         return "redirect:/";
     }
 }
