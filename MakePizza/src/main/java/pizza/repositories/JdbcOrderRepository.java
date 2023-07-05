@@ -14,6 +14,7 @@ import java.sql.Types;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class JdbcOrderRepository implements OrderRepository {
@@ -95,5 +96,60 @@ public class JdbcOrderRepository implements OrderRepository {
                     + "values (?, ?, ?,)",
                     ref.getIngredient(), pizzaId, key++);
         }
+    }
+
+    @Override
+    public <S extends PizzaOrder> Iterable<S> saveAll(Iterable<S> entities) {
+        return null;
+    }
+
+    @Override
+    public Optional<PizzaOrder> findById(Long aLong) {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean existsById(Long aLong) {
+        return false;
+    }
+
+    @Override
+    public Iterable<PizzaOrder> findAll() {
+        return null;
+    }
+
+    @Override
+    public Iterable<PizzaOrder> findAllById(Iterable<Long> longs) {
+        return null;
+    }
+
+    @Override
+    public long count() {
+        return 0;
+    }
+
+    @Override
+    public void deleteById(Long aLong) {
+
+    }
+
+    @Override
+    public void delete(PizzaOrder entity) {
+
+    }
+
+    @Override
+    public void deleteAllById(Iterable<? extends Long> longs) {
+
+    }
+
+    @Override
+    public void deleteAll(Iterable<? extends PizzaOrder> entities) {
+
+    }
+
+    @Override
+    public void deleteAll() {
+
     }
 }

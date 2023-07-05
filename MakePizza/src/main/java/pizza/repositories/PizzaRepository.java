@@ -7,5 +7,5 @@ import pizza.models.Pizza;
 import java.util.List;
 
 public interface PizzaRepository extends CrudRepository<Pizza, Long> {
-    List<Pizza> findAll(PageRequest page);
+//    List<Pizza> findAll(PageRequest page);
 }
