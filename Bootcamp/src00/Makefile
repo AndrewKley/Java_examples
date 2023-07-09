@@ -8,5 +8,9 @@ PrimeNumber:
 	javac PrimeNumber.java
 	java PrimeNumber 
 
+LinePermutation:
+	javac LinePermutation.java
+	java LinePermutation
+
 clean:
 	rm -rf *.class
