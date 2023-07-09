@@ -11,18 +11,15 @@ public class PrimeNumber {
                 System.out.println("theIllegalArgument");
                 return;
             }
-            if (num % 2 == 0) {
-                System.out.println("false 1");
-                return;
-            }
-            int count = 0;
-            for (int i = 3; i < num / 2; i += 2, count++) {
+            
+            int i = 2;
+            for (; i*i <= num / 2+1; i++) {
                 if (num % i == 0) {
-                    System.out.printf("false %d\n", count);
+                    System.out.printf("false %d\n", i - 2);
                     return;
                 }
             }
-            System.out.printf("true %d\n", count);
+            System.out.printf("true %d\n", i-1);
         } catch (IOException e) { }
     }
 }
